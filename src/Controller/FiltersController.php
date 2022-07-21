@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Service\Filters;
+use App\Service\FilterTypes;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,38 +10,38 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/api/filters/')]
 class FiltersController extends AbstractController
 {
-    private $filters;
+    private $filterTypes;
 
-    public function __construct(Filters $filters)
+    public function __construct(FilterTypes $filterTypes)
     {
-        $this->filters = $filters;
+        $this->filterTypes = $filterTypes;
     }
 
     #[Route('storage')]
     public function getStorage(): Response
     {
-        $storageOptions = $this->filters->getStorage();
+        $storageOptions = $this->filterTypes->getStorage();
         return $this->json($storageOptions);
     }
 
     #[Route('ram')]
     public function getRam(): Response
     {
-        $ramOptions = $this->filters->getRam();
+        $ramOptions = $this->filterTypes->getRam();
         return $this->json($ramOptions);
     }
 
     #[Route('hard-disk-type')]
     public function getHardDiskType(): Response
     {
-        $hardDiskTypeOptions = $this->filters->getHardDiskType();
+        $hardDiskTypeOptions = $this->filterTypes->getHardDiskType();
         return $this->json($hardDiskTypeOptions);
     }
 
     #[Route('location')]
     public function getLocation(): Response
     {
-        $locations = $this->filters->getLocation();
+        $locations = $this->filterTypes->getLocation();
         return $this->json($locations);
     }
 }

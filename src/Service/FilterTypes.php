@@ -4,7 +4,7 @@ namespace App\Service;
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
-class Filters {
+class FilterTypes {
     private const FILE_PATH = './assets/LeaseWeb_servers_filters_assignment.xlsx';
 
     public function getStorage()
