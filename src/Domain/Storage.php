@@ -2,14 +2,15 @@
 
 namespace App\Domain;
 
-use App\Enums\DataUnit;
+use App\Enums\DataUnitEnum;
+use App\Enums\HardDiskTypeEnum;
 
 class Storage 
 {
     public function __construct(
-        private string $type,
+        private HardDiskTypeEnum $type,
         private int $size,
-        private DataUnit $unit
+        private DataUnitEnum $unit
     )
     { }
 
@@ -24,14 +25,14 @@ class Storage
         $parser = new StorageDescriptorParser($storageDescriptor);
         $size = $parser->parseDisksCapacity($storageDescriptor);
         $quantity = $parser->parseDiskQuantity($storageDescriptor);
-        $unit = $parser->parseDataUnit($storageDescriptor);
+        $unit = $parser->parseDataUnitEnum($storageDescriptor);
         $type = $parser->parseDisksType($storageDescriptor);
         $totalCapacity = $size * $quantity;
 
         return new Storage($type, $totalCapacity, $unit);
     }
 
-    public function getType() : string
+    public function getType() : HardDiskTypeEnum
     {
         return $this->type;
     }
@@ -41,7 +42,7 @@ class Storage
         return $this->size;
     }
 
-    public function getUnit() : DataUnit
+    public function getUnit() : DataUnitEnum
     {
         return $this->unit;
     }

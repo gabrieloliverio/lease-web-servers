@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Domain\RamMemory;
-use App\Enums\DataUnit;
+use App\Enums\DataUnitEnum;
 use PHPUnit\Framework\TestCase;
 
 class RamMemoryTest extends TestCase
@@ -13,9 +13,9 @@ class RamMemoryTest extends TestCase
         $descriptor01 = '32GBDDR3';
         $descriptor02 = '4TBDDR3';
         $descriptor03 = '128GBDDR4';
-        $memory01 = new RamMemory('DDR3', 32, DataUnit::GB);
-        $memory02 = new RamMemory('DDR3', 4, DataUnit::TB);
-        $memory03 = new RamMemory('DDR4', 128, DataUnit::GB);
+        $memory01 = new RamMemory('DDR3', 32, DataUnitEnum::GB);
+        $memory02 = new RamMemory('DDR3', 4, DataUnitEnum::TB);
+        $memory03 = new RamMemory('DDR4', 128, DataUnitEnum::GB);
         
         $this->assertEquals($memory01, RamMemory::make($descriptor01));
         $this->assertEquals($memory02, RamMemory::make($descriptor02));

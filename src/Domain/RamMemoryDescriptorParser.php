@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-use App\Enums\DataUnit;
+use App\Enums\DataUnitEnum;
 use InvalidArgumentException;
 
 class RamMemoryDescriptorParser
@@ -21,7 +21,7 @@ class RamMemoryDescriptorParser
         return $matches[1];
     }
 
-    public function parseDataUnit(string $memoryDescriptor) : DataUnit
+    public function parseDataUnitEnum(string $memoryDescriptor) : DataUnitEnum
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $memoryDescriptor, $matches);
@@ -29,14 +29,14 @@ class RamMemoryDescriptorParser
         if (
             empty($matches) || 
             !isset($matches[2]) ||
-            !DataUnit::tryFrom($matches[2])
+            !DataUnitEnum::tryFrom($matches[2])
             ) {
             throw new InvalidArgumentException("Invalid descriptor format");
         }
 
         $unit = $matches[2];
 
-        return DataUnit::from($unit);
+        return DataUnitEnum::from($unit);
     }
 
     public function parseType(string $memoryDescriptor) : string

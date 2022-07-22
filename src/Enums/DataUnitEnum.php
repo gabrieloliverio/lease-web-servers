@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum DataUnit : string
+enum DataUnitEnum : string
 {
     case GB = 'GB';
     case TB = 'TB';

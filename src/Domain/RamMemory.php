@@ -2,14 +2,14 @@
 
 namespace App\Domain;
 
-use App\Enums\DataUnit;
+use App\Enums\DataUnitEnum;
 
 class RamMemory 
 {
     public function __construct(
         private string $type,
         private int $size,
-        private DataUnit $unit
+        private DataUnitEnum $unit
     )
     { }
 
@@ -23,7 +23,7 @@ class RamMemory
     {
         $parser = new RamMemoryDescriptorParser($memoryDescriptor);
         $capacity = $parser->parseCapacity($memoryDescriptor);
-        $unit = $parser->parseDataUnit($memoryDescriptor);
+        $unit = $parser->parseDataUnitEnum($memoryDescriptor);
         $type = $parser->parseType($memoryDescriptor);
 
         return new RamMemory($type, $capacity, $unit);
@@ -39,7 +39,7 @@ class RamMemory
         return $this->size;
     }
 
-    public function getUnit() : DataUnit
+    public function getUnit() : DataUnitEnum
     {
         return $this->unit;
     }

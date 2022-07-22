@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Domain\RamMemoryDescriptorParser;
-use App\Enums\DataUnit;
+use App\Enums\DataUnitEnum;
 use PHPUnit\Framework\TestCase;
 
 class RamMemoryDescriptorParserTest extends TestCase
@@ -32,21 +32,21 @@ class RamMemoryDescriptorParserTest extends TestCase
         self::$parser->parseType('32GTEDO');
     }
 
-    public function testParseDataUnitGB(): void
+    public function testParseDataUnitEnumGB(): void
     {
-        $this->assertEquals(DataUnit::GB, self::$parser->parseDataUnit('32GBDDR3'));
+        $this->assertEquals(DataUnitEnum::GB, self::$parser->parseDataUnitEnum('32GBDDR3'));
     }
 
-    public function testParseDataUnitTB(): void
+    public function testParseDataUnitEnumTB(): void
     {
-        $this->assertEquals(DataUnit::TB, self::$parser->parseDataUnit('1TBDDR3'));
+        $this->assertEquals(DataUnitEnum::TB, self::$parser->parseDataUnitEnum('1TBDDR3'));
     }
 
-    public function testParseDataUnitInvalidDescriptor(): void
+    public function testParseDataUnitEnumInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
-        self::$parser->parseDataUnit('1NMDDR4');
+        self::$parser->parseDataUnitEnum('1NMDDR4');
     }
 
     public function testParseCapacityOneDigit(): void

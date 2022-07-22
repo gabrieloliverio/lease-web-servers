@@ -2,7 +2,7 @@
 
 namespace App\Infrastructure;
 
-use App\Domain\FilterRepository;
+use App\Domain\Filter\FilterRepository;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class FilterRepositorySpreadsheet implements FilterRepository

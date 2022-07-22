@@ -2,7 +2,8 @@
 
 namespace App\Domain;
 
-use App\Enums\DataUnit;
+use App\Enums\DataUnitEnum;
+use App\Enums\HardDiskTypeEnum;
 use InvalidArgumentException;
 
 class StorageDescriptorParser
@@ -33,7 +34,7 @@ class StorageDescriptorParser
         return $matches[1];
     }
 
-    public function parseDataUnit(string $storageDescriptor) : DataUnit
+    public function parseDataUnitEnum(string $storageDescriptor) : DataUnitEnum
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
@@ -41,30 +42,31 @@ class StorageDescriptorParser
         if (
             empty($matches) || 
             !isset($matches[3]) ||
-            !DataUnit::tryFrom($matches[3])
+            !DataUnitEnum::tryFrom($matches[3])
             ) {
             throw new InvalidArgumentException("Invalid descriptor format");
         }
 
         $unit = $matches[3];
 
-        return DataUnit::from($unit);
+        return DataUnitEnum::from($unit);
     }
 
-    public function parseDisksType(string $storageDescriptor) : string
+    public function parseDisksType(string $storageDescriptor) : HardDiskTypeEnum
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
-        $validDiskTypes = ['SATA2', 'SSD'];
 
         if (
             empty($matches) || 
             !isset($matches[4]) || 
-            !in_array($matches[4], $validDiskTypes)
+            !HardDiskTypeEnum::tryFrom($matches[4])
             ) {
             throw new InvalidArgumentException("Invalid descriptor format");
         }
 
-        return $matches[4];
+        $type = $matches[4];
+
+        return HardDiskTypeEnum::from($type);
     }
 }

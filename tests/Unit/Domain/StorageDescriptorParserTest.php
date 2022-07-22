@@ -3,7 +3,8 @@
 declare(strict_types=1);
 
 use App\Domain\StorageDescriptorParser;
-use App\Enums\DataUnit;
+use App\Enums\DataUnitEnum;
+use App\Enums\HardDiskTypeEnum;
 use PHPUnit\Framework\TestCase;
 
 class StorageDescriptorParserTest extends TestCase
@@ -17,12 +18,12 @@ class StorageDescriptorParserTest extends TestCase
 
     public function testParseDisksTypeSATA2(): void
     {
-        $this->assertEquals('SATA2', self::$parser->parseDisksType('8x2TBSATA2'));
+        $this->assertEquals(HardDiskTypeEnum::SATA2, self::$parser->parseDisksType('8x2TBSATA2'));
     }
 
     public function testParseDisksTypeSSD(): void
     {
-        $this->assertEquals('SSD', self::$parser->parseDisksType('8x2TBSSD'));
+        $this->assertEquals(HardDiskTypeEnum::SSD, self::$parser->parseDisksType('8x2TBSSD'));
     }
 
     public function testParseDisksTypeInvalidDescriptor(): void
@@ -32,21 +33,21 @@ class StorageDescriptorParserTest extends TestCase
         self::$parser->parseDisksType('8x2TBPATA');
     }
 
-    public function testParseDataUnitGB(): void
+    public function testParseDataUnitEnumGB(): void
     {
-        $this->assertEquals(DataUnit::GB, self::$parser->parseDataUnit('8x2GBSATA2'));
+        $this->assertEquals(DataUnitEnum::GB, self::$parser->parseDataUnitEnum('8x2GBSATA2'));
     }
 
-    public function testParseDataUnitTB(): void
+    public function testParseDataUnitEnumTB(): void
     {
-        $this->assertEquals(DataUnit::TB, self::$parser->parseDataUnit('8x2TBSATA2'));
+        $this->assertEquals(DataUnitEnum::TB, self::$parser->parseDataUnitEnum('8x2TBSATA2'));
     }
 
-    public function testParseDataUnitInvalidDescriptor(): void
+    public function testParseDataUnitEnumInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
-        self::$parser->parseDataUnit('8x2SATA2');
+        self::$parser->parseDataUnitEnum('8x2SATA2');
     }
 
     public function testParseDiskQuantityOneDigit(): void
