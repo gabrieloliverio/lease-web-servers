@@ -9,7 +9,7 @@ class StorageDescriptorParser
 {
     private const DESCRIPTOR_REGEX = '/(\d+)+x(\d+)(\w{2})(\w+)/';
 
-    public function parseDisksSize(string $storageDescriptor) : int
+    public function parseDisksCapacity(string $storageDescriptor) : int
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
@@ -18,9 +18,7 @@ class StorageDescriptorParser
             throw new InvalidArgumentException("Invalid descriptor format");
         }
 
-        $size = $matches[2];
-
-        return $size;
+        return $matches[2];
     }
 
     public function parseDiskQuantity(string $storageDescriptor) : int

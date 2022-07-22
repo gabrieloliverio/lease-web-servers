@@ -66,20 +66,20 @@ class StorageDescriptorParserTest extends TestCase
         self::$parser->parseDiskQuantity('x2TBSATA2');
     }
 
-    public function testParseDisksSizeOneDigit(): void
+    public function testParseDisksCapacityOneDigit(): void
     {
-        $this->assertEquals(2, self::$parser->parseDisksSize('8x2TBSATA2'));
+        $this->assertEquals(2, self::$parser->parseDisksCapacity('8x2TBSATA2'));
     }
 
-    public function testParseDisksSizeSeveralDigits(): void
+    public function testParseDisksCapacitySeveralDigits(): void
     {
-        $this->assertEquals(2000, self::$parser->parseDisksSize('1000x2000GBSATA2'));
+        $this->assertEquals(2000, self::$parser->parseDisksCapacity('1000x2000GBSATA2'));
     }
 
-    public function testParseDisksSizeInvalidDescriptor(): void
+    public function testParseDisksCapacityInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
-        self::$parser->parseDisksSize('1000xFOOGBSATA2');
+        self::$parser->parseDisksCapacity('1000xFOOGBSATA2');
     }
 }

@@ -22,7 +22,7 @@ class Storage
     public static function make(string $storageDescriptor) : Storage
     {
         $parser = new StorageDescriptorParser($storageDescriptor);
-        $size = $parser->parseDisksSize($storageDescriptor);
+        $size = $parser->parseDisksCapacity($storageDescriptor);
         $quantity = $parser->parseDiskQuantity($storageDescriptor);
         $unit = $parser->parseDataUnit($storageDescriptor);
         $type = $parser->parseDisksType($storageDescriptor);
@@ -36,7 +36,7 @@ class Storage
         return $this->type;
     }
 
-    public function getSize() : int
+    public function getCapacity() : int
     {
         return $this->size;
     }
