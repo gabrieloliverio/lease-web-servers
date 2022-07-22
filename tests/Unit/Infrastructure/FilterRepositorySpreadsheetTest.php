@@ -5,7 +5,7 @@ declare(strict_types=1);
 use App\Infrastructure\FilterRepositorySpreadsheet;
 use PHPUnit\Framework\TestCase;
 
-class FilterRepositoryTest extends TestCase
+class FilterRepositorySpreadsheetTest extends TestCase
 {
     private static $repository;
     
