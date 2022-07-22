@@ -2,14 +2,14 @@
 
 namespace App\Domain;
 
-use App\Enums\DiskUnit;
+use App\Enums\DataUnit;
 
 class Storage 
 {
     public function __construct(
         private string $type,
         private int $size,
-        private DiskUnit $unity
+        private DataUnit $unit
     )
     { }
 
@@ -24,7 +24,7 @@ class Storage
         $parser = new StorageDescriptorParser($storageDescriptor);
         $size = $parser->parseDisksSize($storageDescriptor);
         $quantity = $parser->parseDiskQuantity($storageDescriptor);
-        $unit = $parser->parseDiskUnit($storageDescriptor);
+        $unit = $parser->parseDataUnit($storageDescriptor);
         $type = $parser->parseDisksType($storageDescriptor);
         $totalCapacity = $size * $quantity;
 
@@ -41,8 +41,8 @@ class Storage
         return $this->size;
     }
 
-    public function getUnity() : DiskUnit
+    public function getUnit() : DataUnit
     {
-        return $this->unity;
+        return $this->unit;
     }
 }

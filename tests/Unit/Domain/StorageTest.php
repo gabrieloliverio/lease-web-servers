@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Domain\Storage;
-use App\Enums\DiskUnit;
+use App\Enums\DataUnit;
 use PHPUnit\Framework\TestCase;
 
 class StorageTest extends TestCase
@@ -13,9 +13,9 @@ class StorageTest extends TestCase
         $descriptor01 = '2x120GBSSD';
         $descriptor02 = '2x500GBSATA2';
         $descriptor03 = '2x1TBSATA2';
-        $storage01 = new Storage('SSD', 240, DiskUnit::GB);
-        $storage02 = new Storage('SATA2', 1000, DiskUnit::GB);
-        $storage03 = new Storage('SATA2', 2, DiskUnit::TB);
+        $storage01 = new Storage('SSD', 240, DataUnit::GB);
+        $storage02 = new Storage('SATA2', 1000, DataUnit::GB);
+        $storage03 = new Storage('SATA2', 2, DataUnit::TB);
         
         $this->assertEquals($storage01, Storage::make($descriptor01));
         $this->assertEquals($storage02, Storage::make($descriptor02));

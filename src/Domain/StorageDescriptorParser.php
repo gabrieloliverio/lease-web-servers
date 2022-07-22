@@ -2,7 +2,7 @@
 
 namespace App\Domain;
 
-use App\Enums\DiskUnit;
+use App\Enums\DataUnit;
 use InvalidArgumentException;
 
 class StorageDescriptorParser
@@ -32,12 +32,10 @@ class StorageDescriptorParser
             throw new InvalidArgumentException("Invalid descriptor format");
         }
 
-        $quantity = $matches[1];
-
-        return $quantity;
+        return $matches[1];
     }
 
-    public function parseDiskUnit(string $storageDescriptor) : DiskUnit
+    public function parseDataUnit(string $storageDescriptor) : DataUnit
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
@@ -45,14 +43,14 @@ class StorageDescriptorParser
         if (
             empty($matches) || 
             !isset($matches[3]) ||
-            !DiskUnit::tryFrom($matches[3])
+            !DataUnit::tryFrom($matches[3])
             ) {
             throw new InvalidArgumentException("Invalid descriptor format");
         }
 
         $unit = $matches[3];
 
-        return DiskUnit::from($unit);
+        return DataUnit::from($unit);
     }
 
     public function parseDisksType(string $storageDescriptor) : string
@@ -69,8 +67,6 @@ class StorageDescriptorParser
             throw new InvalidArgumentException("Invalid descriptor format");
         }
 
-        $type = $matches[4];
-
-        return $type;
+        return $matches[4];
     }
 }

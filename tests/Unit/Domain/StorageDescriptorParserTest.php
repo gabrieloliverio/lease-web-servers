@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use App\Domain\StorageDescriptorParser;
-use App\Enums\DiskUnit;
+use App\Enums\DataUnit;
 use PHPUnit\Framework\TestCase;
 
 class StorageDescriptorParserTest extends TestCase
@@ -32,21 +32,21 @@ class StorageDescriptorParserTest extends TestCase
         self::$parser->parseDisksType('8x2TBPATA');
     }
 
-    public function testGetDiskUnitGB(): void
+    public function testGetDataUnitGB(): void
     {
-        $this->assertEquals(DiskUnit::GB, self::$parser->parseDiskUnit('8x2GBSATA2'));
+        $this->assertEquals(DataUnit::GB, self::$parser->parseDataUnit('8x2GBSATA2'));
     }
 
-    public function testGetDiskUnitTB(): void
+    public function testGetDataUnitTB(): void
     {
-        $this->assertEquals(DiskUnit::TB, self::$parser->parseDiskUnit('8x2TBSATA2'));
+        $this->assertEquals(DataUnit::TB, self::$parser->parseDataUnit('8x2TBSATA2'));
     }
 
-    public function testGetDiskUnitInvalidDescriptor(): void
+    public function testGetDataUnitInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
-        self::$parser->parseDiskUnit('8x2SATA2');
+        self::$parser->parseDataUnit('8x2SATA2');
     }
 
     public function testGetDiskQuantityOneDigit(): void
