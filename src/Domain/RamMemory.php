@@ -8,7 +8,7 @@ class RamMemory
 {
     public function __construct(
         private string $type,
-        private int $size,
+        private int $capacity,
         private DataUnitEnum $unit
     )
     { }
@@ -34,13 +34,31 @@ class RamMemory
         return $this->type;
     }
 
-    public function getSize() : int
+    public function getCapacity() : int
     {
-        return $this->size;
+        return $this->capacity;
     }
 
     public function getUnit() : DataUnitEnum
     {
         return $this->unit;
+    }
+
+    public function getTotalCapacityInGB()
+    {
+        if ($this->unit == DataUnitEnum::GB) {
+            return $this->capacity;
+        }
+
+        return $this->capacity * 1000;
+    }
+
+    public function getTotalCapacityInTB()
+    {
+        if ($this->unit == DataUnitEnum::TB) {
+            return $this->capacity;
+        }
+
+        return $this->capacity / 1000;
     }
 }
