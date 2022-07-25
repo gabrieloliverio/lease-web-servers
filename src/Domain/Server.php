@@ -65,7 +65,7 @@ class Server
     {
         if ($hardDiskType == HardDiskTypeEnum::SATA || $hardDiskType == HardDiskTypeEnum::SATA2) {
             return $this->storage->getType() == HardDiskTypeEnum::SATA 
-                || $this->storage->type == HardDiskTypeEnum::SATA2;
+                || $this->storage->getType() == HardDiskTypeEnum::SATA2;
         }
 
         return $this->storage->getType() == $hardDiskType;

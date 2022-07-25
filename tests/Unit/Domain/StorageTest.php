@@ -13,6 +13,21 @@ use PHPUnit\Framework\TestCase;
 
 class StorageTest extends TestCase
 {
+    public function testGetters()
+    {
+        $storage = Storage::make('2x4TBSSD');
+        $ramMemory = RamMemory::make('4GBDDR3');
+        $model = 'FOO';
+        $location = 'BAR';
+        $server = new Server($model, $ramMemory, $storage, $location, 199.99);
+
+        $this->assertEquals($model, $server->getModel());
+        $this->assertEquals($ramMemory, $server->getRamMemory());
+        $this->assertEquals($storage, $server->getStorage());
+        $this->assertEquals(199.99, $server->getPrice());
+        $this->assertEquals($location, $server->getLocation());
+    }
+
     public function testMakeValidDescriptors(): void
     {
         $descriptor01 = '2x120GBSSD';
