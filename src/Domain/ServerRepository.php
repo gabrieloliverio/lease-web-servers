@@ -16,7 +16,7 @@ interface ServerRepository
      * @param RamMemoryDTO $ramMemory
      * @param HardDiskTypeEnum $hardDiskType
      * @param Location $location
-     * @return array Array of Storage objects
+     * @return array Array of Server objects
      */
     public function search(
         StorageDTO $storage,

@@ -6,8 +6,9 @@ use App\Domain\Filter\RamMemoryDTO;
 use App\Domain\Filter\StorageDTO;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
+use JsonSerializable;
 
-class Server 
+class Server implements JsonSerializable
 {
     public function __construct(
         private string $model,
@@ -69,5 +70,16 @@ class Server
         }
 
         return $this->storage->getType() == $hardDiskType;
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'model' => $this->model,
+            'ram_memory' => $this->ramMemory->getCapacity(),
+            'storage' => $this->storage->getCapacity(),
+            'location' => $this->location,
+            'price' => $this->price,
+        ];
     }
 }
