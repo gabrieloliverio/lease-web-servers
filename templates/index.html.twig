@@ -54,6 +54,7 @@ window.search = async function() {
                     <div class="col-3">
                         <label for="storage" class="form-label d-block">Storage</label>
                         <select class="form-select" id="storage" x-model="storage">
+                            <option selected>Select</option>
                             <template x-for="eachStorage in storageList">
                                 <option :value="eachStorage" x-text="eachStorage"></option>
                             </template>
