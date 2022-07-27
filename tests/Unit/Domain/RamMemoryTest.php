@@ -17,9 +17,9 @@ class RamMemoryTest extends TestCase
         $memory02 = new RamMemory('DDR3', 4, DataUnitEnum::TB);
         $memory03 = new RamMemory('DDR4', 128, DataUnitEnum::GB);
         
-        $this->assertEquals($memory01, RamMemory::make($descriptor01));
-        $this->assertEquals($memory02, RamMemory::make($descriptor02));
-        $this->assertEquals($memory03, RamMemory::make($descriptor03));
+        $this->assertEquals($memory01, RamMemory::makeFromDescriptor($descriptor01));
+        $this->assertEquals($memory02, RamMemory::makeFromDescriptor($descriptor02));
+        $this->assertEquals($memory03, RamMemory::makeFromDescriptor($descriptor03));
     }
 
     /**
@@ -29,7 +29,7 @@ class RamMemoryTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        RamMemory::make($descriptor);
+        RamMemory::makeFromDescriptor($descriptor);
     }
 
     public function invalidDescritorProvider() : array

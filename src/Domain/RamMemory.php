@@ -19,7 +19,7 @@ class RamMemory
      * @param string $memoryDescriptor Descriptor like "32GBDDR3"
      * @return RamMemory
      */
-    public static function make(string $memoryDescriptor) : RamMemory
+    public static function makeFromDescriptor(string $memoryDescriptor) : RamMemory
     {
         $parser = new RamMemoryDescriptorParser($memoryDescriptor);
         $capacity = $parser->parseCapacity($memoryDescriptor);

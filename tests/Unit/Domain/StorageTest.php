@@ -16,7 +16,7 @@ class StorageTest extends TestCase
     public function testGetters()
     {
         $storage = Storage::makeFromDescriptor('2x4TBSSD');
-        $ramMemory = RamMemory::make('4GBDDR3');
+        $ramMemory = RamMemory::makeFromDescriptor('4GBDDR3');
         $model = 'FOO';
         $location = 'BAR';
         $server = new Server($model, $ramMemory, $storage, $location, 199.99);
@@ -72,7 +72,7 @@ class StorageTest extends TestCase
     {
         $storage01 = Storage::makeFromDescriptor('2x120GBSSD');
         $storage02 = Storage::makeFromDescriptor('2x4TBSSD');
-        $ramMemory = RamMemory::make('4GBDDR3');
+        $ramMemory = RamMemory::makeFromDescriptor('4GBDDR3');
         $server01 = new Server('FOO', $ramMemory, $storage01, 'BAR', 199.99);
         $server02 = new Server('BAZ', $ramMemory, $storage02, 'BUZ', 399.99);
 
@@ -88,8 +88,8 @@ class StorageTest extends TestCase
     public function testHasRamMemoryCapacitySingleItem(): void
     {
         $storage = Storage::makeFromDescriptor('2x120GBSSD');
-        $ramMemory01 = RamMemory::make('4GBDDR3');
-        $ramMemory02 = RamMemory::make('128GBDDR3');
+        $ramMemory01 = RamMemory::makeFromDescriptor('4GBDDR3');
+        $ramMemory02 = RamMemory::makeFromDescriptor('128GBDDR3');
         $server01 = new Server('FOO', $ramMemory01, $storage, 'BAR', 199.99);
         $server02 = new Server('BAZ', $ramMemory02, $storage, 'BUZ', 399.99);
 
@@ -110,7 +110,7 @@ class StorageTest extends TestCase
         $ramMemory03 = new RamMemoryDTO(16, DataUnitEnum::GB);
         $ramMemories01 = [$ramMemory01, $ramMemory02];
         $ramMemories02 = [$ramMemory02, $ramMemory03];
-        $server = new Server('FOO', RamMemory::make('4GBDDR3'), $storage, 'BAR', 199.99);
+        $server = new Server('FOO', RamMemory::makeFromDescriptor('4GBDDR3'), $storage, 'BAR', 199.99);
 
         $this->assertTrue($server->hasRamMemoryCapacity($ramMemories01));
         $this->assertFalse($server->hasRamMemoryCapacity($ramMemories02));
