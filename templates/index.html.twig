@@ -14,7 +14,7 @@ window.search = async function() {
         'location': this.location,
     }
     let endpoint = '{{ api_endpoint }}';
-    fetch(endpoint + '/servers?' + new URLSearchParams(params))
+    fetch(endpoint + '/servers/?' + new URLSearchParams(params))
           .then(res => res.json())
           .then(data => {
             this.result = data;
