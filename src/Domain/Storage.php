@@ -64,4 +64,9 @@ class Storage
 
         return $this->capacity / 1000;
     }
+
+    public function __toString()
+    {
+        return $this->capacity . $this->unit->value;
+    }
 }

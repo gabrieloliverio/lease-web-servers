@@ -7,6 +7,7 @@ use App\Domain\Filter\StorageDTO;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
 use JsonSerializable;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class Server implements JsonSerializable
 {
@@ -76,8 +77,9 @@ class Server implements JsonSerializable
     {
         return [
             'model' => $this->model,
-            'ram_memory' => $this->ramMemory->getCapacity(),
-            'storage' => $this->storage->getCapacity(),
+            'ram_memory' => (string) $this->ramMemory,
+            'storage' => (string) $this->storage,
+            'hard_disk_type' => $this->storage->getType(),
             'location' => $this->location,
             'price' => $this->price,
         ];
