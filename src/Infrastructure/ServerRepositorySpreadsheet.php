@@ -14,12 +14,13 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 
 class ServerRepositorySpreadsheet implements ServerRepository
 {
-    private const FILE_PATH = './assets/LeaseWeb_servers_filters_assignment.xlsx';
+    private const FILE_NAME = 'LeaseWeb_servers_filters_assignment.xlsx';
     private $spreadsheet;
 
-    public function __construct()
+    public function __construct($assetsDir)
     {
-        $this->spreadsheet = IOFactory::load(self::FILE_PATH);
+        $filePath = $assetsDir . self::FILE_NAME;
+        $this->spreadsheet = IOFactory::load($filePath);
     }
 
     public function search(

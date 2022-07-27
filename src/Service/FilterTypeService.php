@@ -2,13 +2,15 @@
 
 namespace App\Service;
 
-use App\Infrastructure\FilterRepositorySpreadsheet;
+use App\Domain\Filter\FilterRepository;
 
 class FilterTypeService {
-    public function __construct(
-        private $repository = new FilterRepositorySpreadsheet
-    )
-    { }
+    private $repository;
+
+    public function __construct(FilterRepository $filterRepository)
+    { 
+        $this->repository = $filterRepository;
+    }
 
     public function getStorage() : array
     {
