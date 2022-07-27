@@ -15,7 +15,7 @@ class ServerService
 
     public function search(
         ?StorageDTO $storage = null,
-        ?RamMemoryDTO $ramMemory = null,
+        RamMemoryDTO|array $ramMemory = null,
         ?HardDiskTypeEnum $hardDiskType = null,
         ?LocationDTO $location = null
     )

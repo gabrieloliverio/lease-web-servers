@@ -24,7 +24,7 @@ class ServerRepositorySpreadsheet implements ServerRepository
 
     public function search(
         ?StorageDTO $storage = null,
-        ?RamMemoryDTO $ramMemory = null,
+        RamMemoryDTO|array $ramMemoryList = null,
         ?HardDiskTypeEnum $hardDiskType = null,
         ?LocationDTO $location = null
     ) : array
@@ -34,7 +34,7 @@ class ServerRepositorySpreadsheet implements ServerRepository
         
         if (
             !$storage &&
-            !$ramMemory &&
+            !$ramMemoryList &&
             !$hardDiskType &&
             !$location
         ) {
@@ -46,7 +46,7 @@ class ServerRepositorySpreadsheet implements ServerRepository
                 continue;
             }
 
-            if ($ramMemory && ! $server->hasRamMemoryCapacity($ramMemory)) {
+            if ($ramMemoryList && ! $server->hasRamMemoryCapacity($ramMemoryList)) {
                 continue;
             }
             

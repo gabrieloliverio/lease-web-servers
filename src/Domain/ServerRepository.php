@@ -13,15 +13,15 @@ interface ServerRepository
      * Searches for a server, based on filters
      * 
      * @param StorageDTO $storage
-     * @param RamMemoryDTO $ramMemory
+     * @param RamMemoryDTO|array $ramMemory RamMemoryDTO or Array of RamMemoryDTO objects
      * @param HardDiskTypeEnum $hardDiskType
      * @param Location $location
      * @return array Array of Server objects
      */
     public function search(
-        StorageDTO $storage,
-        RamMemoryDTO $ramMemory,
-        HardDiskTypeEnum $hardDiskType,
-        LocationDTO $location
+        ?StorageDTO $storage = null,
+        RamMemoryDTO|array $ramMemory = null,
+        ?HardDiskTypeEnum $hardDiskType = null,
+        ?LocationDTO $location = null
     ) : array;
 }

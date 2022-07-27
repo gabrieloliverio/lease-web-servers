@@ -67,6 +67,9 @@ class Storage
 
     public function __toString()
     {
+        if ($this->capacity >= 1000) {
+            return $this->getTotalCapacityInTB() . DataUnitEnum::TB->value;
+        }
         return $this->capacity . $this->unit->value;
     }
 }

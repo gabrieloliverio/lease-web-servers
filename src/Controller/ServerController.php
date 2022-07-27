@@ -58,7 +58,6 @@ class ServerController extends AbstractController
                 $ramDTOList[] = new RamMemoryDTO($memoryMatches[1], DataUnitEnum::from($memoryMatches[2]));
             }
         }
-
         if ($storage) {
             $storageMatches = [];
             preg_match('/(\d+)(\w{2})/', $storage, $storageMatches);
@@ -75,7 +74,7 @@ class ServerController extends AbstractController
         
         $results = $this->service->search(
             $storageDTO, 
-            $memoryDTO, 
+            $ramDTOList, 
             $hardDiskTypeEnum,
             $locationDTO
         );

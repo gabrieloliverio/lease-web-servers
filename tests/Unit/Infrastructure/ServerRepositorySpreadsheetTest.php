@@ -27,7 +27,7 @@ class ServerRepositorySpreadsheetTest extends TestCase
         $this->assertCount(486, self::$repository->getAll());
     }
     
-    public function testSearchFound()
+    public function testSearchFoundSingleMemory()
     {
         $storage = new StorageDTO(24, DataUnitEnum::TB);
         $ram = new RamMemoryDTO(32, DataUnitEnum::GB);
@@ -47,10 +47,33 @@ class ServerRepositorySpreadsheetTest extends TestCase
         $this->assertEquals('Supermicro SC846Intel Xeon E5620', $search[0]->getModel());
     }
 
+    public function testSearchFoundMultipleMemory()
+    {
+        $storage = new StorageDTO(24, DataUnitEnum::TB);
+        $ram = [
+            new RamMemoryDTO(16, DataUnitEnum::GB),
+            new RamMemoryDTO(32, DataUnitEnum::GB),
+        ];
+        $hardDiskType = HardDiskTypeEnum::SATA;
+        $location = new LocationDTO('FrankfurtFRA-10');
+
+        $search = self::$repository->search(
+            $storage,
+            $ram,
+            $hardDiskType,
+            $location
+        );
+
+        $this->assertNotEmpty($search);
+        $this->assertContainsOnlyInstancesOf(Server::class, $search);
+        $this->assertCount(8, $search);
+        $this->assertEquals('Supermicro SC846Intel Xeon E5620', $search[0]->getModel());
+    }
+
     public function testSearchNotFound()
     {
         $storage = new StorageDTO(72, DataUnitEnum::TB);
-        $ram = new RamMemoryDTO(100, DataUnitEnum::GB);
+        $ram = [new RamMemoryDTO(100, DataUnitEnum::GB)];
         $hardDiskType = HardDiskTypeEnum::SATA;
         $location = new LocationDTO('FrankfurtFRA-10');
 

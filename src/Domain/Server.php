@@ -48,19 +48,44 @@ class Server implements JsonSerializable
     public function hasStorageCapacity(StorageDTO $storageRequired) : bool
     {
         if ($storageRequired->dataUnit == DataUnitEnum::GB) {
-            return $this->storage->getTotalCapacityInGB() >= $storageRequired->capacity;
+            return $this->storage->getTotalCapacityInGB() == $storageRequired->capacity;
         }
 
-        return $this->storage->getTotalCapacityInTB() >= $storageRequired->capacity;
+        return $this->storage->getTotalCapacityInTB() == $storageRequired->capacity;
     }
 
-    public function hasRamMemoryCapacity(RamMemoryDTO $ramMemoryRequired) : bool
+    public function hasRamMemoryCapacity(RamMemoryDTO|array $ramMemoryRequired) : bool
     {
-        if ($ramMemoryRequired->dataUnit == DataUnitEnum::GB) {
-            return $this->ramMemory->getTotalCapacityInGB() >= $ramMemoryRequired->capacity;
+        if (is_array($ramMemoryRequired)) {
+            return $this->hasRamMemoryCapacityFromList($ramMemoryRequired);
         }
 
-        return $this->ramMemory->getTotalCapacityInTB() >= $ramMemoryRequired->capacity;
+        if ($ramMemoryRequired->dataUnit == DataUnitEnum::GB) {
+            return $this->ramMemory->getTotalCapacityInGB() == $ramMemoryRequired->capacity;
+        }
+
+        return $this->ramMemory->getTotalCapacityInTB() == $ramMemoryRequired->capacity;
+    }
+
+    public function hasRamMemoryCapacityFromList(array $ramMemoryRequiredList)
+    {
+        $hasCapacity = false;
+
+        foreach ($ramMemoryRequiredList as $ramMemory) {
+            if ($ramMemory->dataUnit == DataUnitEnum::GB) {
+                if ($this->ramMemory->getTotalCapacityInGB() == $ramMemory->capacity) {
+                    $hasCapacity = true;
+                    break;
+                }
+            } else {
+                if ($this->ramMemory->getTotalCapacityInTB() == $ramMemory->capacity) {
+                    $hasCapacity = true;
+                    break;
+                }
+            }
+        }
+
+        return $hasCapacity;
     }
 
     public function hasHardDiskType(HardDiskTypeEnum $hardDiskType) : bool

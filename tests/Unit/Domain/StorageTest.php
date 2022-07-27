@@ -76,18 +76,16 @@ class StorageTest extends TestCase
         $server01 = new Server('FOO', $ramMemory, $storage01, 'BAR', 199.99);
         $server02 = new Server('BAZ', $ramMemory, $storage02, 'BUZ', 399.99);
 
-        $this->assertTrue($server01->hasStorageCapacity(new StorageDTO(230, DataUnitEnum::GB)));
         $this->assertTrue($server01->hasStorageCapacity(new StorageDTO(240, DataUnitEnum::GB)));
         $this->assertFalse($server01->hasStorageCapacity(new StorageDTO(250, DataUnitEnum::GB)));
         $this->assertFalse($server01->hasStorageCapacity(new StorageDTO(1, DataUnitEnum::TB)));
 
-        $this->assertTrue($server02->hasStorageCapacity(new StorageDTO(2, DataUnitEnum::TB)));
         $this->assertTrue($server02->hasStorageCapacity(new StorageDTO(8, DataUnitEnum::TB)));
         $this->assertFalse($server02->hasStorageCapacity(new StorageDTO(9, DataUnitEnum::TB)));
         $this->assertFalse($server02->hasStorageCapacity(new StorageDTO(10000, DataUnitEnum::GB)));
     }
 
-    public function testHasRamMemoryCapacity(): void
+    public function testHasRamMemoryCapacitySingleItem(): void
     {
         $storage = Storage::make('2x120GBSSD');
         $ramMemory01 = RamMemory::make('4GBDDR3');
@@ -96,14 +94,26 @@ class StorageTest extends TestCase
         $server02 = new Server('BAZ', $ramMemory02, $storage, 'BUZ', 399.99);
 
         $this->assertTrue($server01->hasRamMemoryCapacity(new RamMemoryDTO(4, DataUnitEnum::GB)));
-        $this->assertTrue($server01->hasRamMemoryCapacity(new RamMemoryDTO(2, DataUnitEnum::GB)));
         $this->assertFalse($server01->hasRamMemoryCapacity(new RamMemoryDTO(8, DataUnitEnum::GB)));
         $this->assertFalse($server01->hasRamMemoryCapacity(new RamMemoryDTO(1, DataUnitEnum::TB)));
 
         $this->assertTrue($server02->hasRamMemoryCapacity(new RamMemoryDTO(128, DataUnitEnum::GB)));
-        $this->assertTrue($server02->hasRamMemoryCapacity(new RamMemoryDTO(4, DataUnitEnum::GB)));
         $this->assertFalse($server02->hasRamMemoryCapacity(new RamMemoryDTO(256, DataUnitEnum::GB)));
         $this->assertFalse($server02->hasRamMemoryCapacity(new RamMemoryDTO(1, DataUnitEnum::TB)));
+    }
+
+    public function testHasRamMemoryCapacityMultipleItems(): void
+    {
+        $storage = Storage::make('2x120GBSSD');
+        $ramMemory01 = new RamMemoryDTO(4, DataUnitEnum::GB);
+        $ramMemory02 = new RamMemoryDTO(8, DataUnitEnum::GB);
+        $ramMemory03 = new RamMemoryDTO(16, DataUnitEnum::GB);
+        $ramMemories01 = [$ramMemory01, $ramMemory02];
+        $ramMemories02 = [$ramMemory02, $ramMemory03];
+        $server = new Server('FOO', RamMemory::make('4GBDDR3'), $storage, 'BAR', 199.99);
+
+        $this->assertTrue($server->hasRamMemoryCapacity($ramMemories01));
+        $this->assertFalse($server->hasRamMemoryCapacity($ramMemories02));
     }
 
     public function invalidDescritorProvider() : array
