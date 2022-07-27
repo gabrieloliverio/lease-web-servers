@@ -13,7 +13,8 @@ window.search = async function() {
         'hard_disk_type': this.hardDiskType ?? '',
         'location': this.location,
     }
-    fetch('http://localhost:8000/api/servers?' + new URLSearchParams(params))
+    let endpoint = '{{ api_endpoint }}';
+    fetch(endpoint + '/servers?' + new URLSearchParams(params))
           .then(res => res.json())
           .then(data => {
             this.result = data;
@@ -39,10 +40,10 @@ window.search = async function() {
         location: '',
     }"
     x-init="
-    storageList = await (await fetch('http://localhost:8000/api/filters/storage')).json();
-    ramList = await (await fetch('http://localhost:8000/api/filters/ram')).json();
-    hardDiskTypeList = await (await fetch('http://localhost:8000/api/filters/hard-disk-type')).json();
-    locationList = await (await fetch('http://localhost:8000/api/filters/location')).json();
+    storageList = await (await fetch('{{ api_endpoint }}/filters/storage')).json();
+    ramList = await (await fetch('{{ api_endpoint }}/filters/ram')).json();
+    hardDiskTypeList = await (await fetch('{{ api_endpoint }}/filters/hard-disk-type')).json();
+    locationList = await (await fetch('{{ api_endpoint }}/filters/location')).json();
     ">
   <div class="row">
     <div class="col">
