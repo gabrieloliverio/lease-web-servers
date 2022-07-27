@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -9,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 class RamMemoryDescriptorParserTest extends TestCase
 {
     private static $parser;
-    
+
     public static function setUpBeforeClass(): void
     {
         self::$parser = new RamMemoryDescriptorParser();
@@ -28,7 +29,7 @@ class RamMemoryDescriptorParserTest extends TestCase
     public function testParseTypeInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         self::$parser->parseType('32GTEDO');
     }
 

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -8,34 +9,34 @@ use PHPUnit\Framework\TestCase;
 class FilterRepositorySpreadsheetTest extends TestCase
 {
     private static $repository;
-    
+
     public static function setUpBeforeClass(): void
     {
         self::$repository = new FilterRepositorySpreadsheet('assets/');
     }
 
-    public function storageProvider() : array
+    public function storageProvider(): array
     {
         return [
             ['250GB'], ['500GB'], ['1TB']
         ];
     }
 
-    public function ramProvider() : array
+    public function ramProvider(): array
     {
         return [
             ['2GB'], ['4GB'], ['8GB']
         ];
     }
 
-    public function hardDiskTypeProvider() : array
+    public function hardDiskTypeProvider(): array
     {
         return [
             ['SAS'], ['SATA'], ['SSD']
         ];
     }
 
-    public function locationProvider() : array
+    public function locationProvider(): array
     {
         return [
             ['AmsterdamAMS-01'], ['Washington D.C.WDC-01'], ['San FranciscoSFO-12']

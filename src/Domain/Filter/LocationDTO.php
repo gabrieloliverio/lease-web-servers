@@ -6,5 +6,6 @@ class LocationDTO
 {
     public function __construct(
         public string $name
-    ) { }
+    ) {
+    }
 }

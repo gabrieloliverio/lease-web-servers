@@ -5,22 +5,22 @@ namespace App\Domain;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
 
-class Storage 
+class Storage
 {
     public function __construct(
         private HardDiskTypeEnum $type,
         private int $capacity,
         private DataUnitEnum $unit
-    )
-    { }
+    ) {
+    }
 
     /**
      * Makes a Storage instance from a descriptor
-     * 
+     *
      * @param string $storageDescriptor Descriptor like  "8x2TBSATA2"
      * @return Storage
      */
-    public static function makeFromDescriptor(string $storageDescriptor) : Storage
+    public static function makeFromDescriptor(string $storageDescriptor): Storage
     {
         $parser = new StorageDescriptorParser($storageDescriptor);
         $capacity = $parser->parseDisksCapacity($storageDescriptor);
@@ -32,17 +32,17 @@ class Storage
         return new Storage($type, $totalCapacity, $unit);
     }
 
-    public function getType() : HardDiskTypeEnum
+    public function getType(): HardDiskTypeEnum
     {
         return $this->type;
     }
 
-    public function getCapacity() : int
+    public function getCapacity(): int
     {
         return $this->capacity;
     }
 
-    public function getUnit() : DataUnitEnum
+    public function getUnit(): DataUnitEnum
     {
         return $this->unit;
     }

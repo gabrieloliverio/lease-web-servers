@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -10,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class StorageDescriptorParserTest extends TestCase
 {
     private static $parser;
-    
+
     public static function setUpBeforeClass(): void
     {
         self::$parser = new StorageDescriptorParser();
@@ -29,7 +30,7 @@ class StorageDescriptorParserTest extends TestCase
     public function testParseDisksTypeInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         self::$parser->parseDisksType('8x2TBPATA');
     }
 

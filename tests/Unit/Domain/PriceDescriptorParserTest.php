@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -8,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 class PriceDescriptorParserTest extends TestCase
 {
     private static $parser;
-    
+
     public static function setUpBeforeClass(): void
     {
         self::$parser = new PriceDescriptorParser();
@@ -27,14 +28,14 @@ class PriceDescriptorParserTest extends TestCase
     public function testValueInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         self::$parser->parseValue('199.99');
     }
 
     public function testCurrencyInvalidDescriptor(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        
+
         self::$parser->parseValue('1');
     }
 }

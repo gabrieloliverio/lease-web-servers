@@ -4,22 +4,22 @@ namespace App\Domain;
 
 use App\Enums\DataUnitEnum;
 
-class RamMemory 
+class RamMemory
 {
     public function __construct(
         private string $type,
         private int $capacity,
         private DataUnitEnum $unit
-    )
-    { }
+    ) {
+    }
 
     /**
      * Makes a RamMemory instance
-     * 
+     *
      * @param string $memoryDescriptor Descriptor like "32GBDDR3"
      * @return RamMemory
      */
-    public static function makeFromDescriptor(string $memoryDescriptor) : RamMemory
+    public static function makeFromDescriptor(string $memoryDescriptor): RamMemory
     {
         $parser = new RamMemoryDescriptorParser($memoryDescriptor);
         $capacity = $parser->parseCapacity($memoryDescriptor);
@@ -29,17 +29,17 @@ class RamMemory
         return new RamMemory($type, $capacity, $unit);
     }
 
-    public function getType() : string
+    public function getType(): string
     {
         return $this->type;
     }
 
-    public function getCapacity() : int
+    public function getCapacity(): int
     {
         return $this->capacity;
     }
 
-    public function getUnit() : DataUnitEnum
+    public function getUnit(): DataUnitEnum
     {
         return $this->unit;
     }

@@ -2,21 +2,21 @@
 
 namespace App\Domain;
 
-class Price 
+class Price
 {
     public function __construct(
         private float $value,
         private string $currency
-    )
-    { }
+    ) {
+    }
 
     /**
      * Makes a Price instance from descriptor
-     * 
+     *
      * @param string $priceDescriptor Descriptor like "$$199.99"
      * @return Price
      */
-    public static function makeFromDescriptor(string $priceDescriptor) : Price
+    public static function makeFromDescriptor(string $priceDescriptor): Price
     {
         $parser = new PriceDescriptorParser($priceDescriptor);
         $value = $parser->parseValue($priceDescriptor);
@@ -25,12 +25,12 @@ class Price
         return new Price($value, $currency);
     }
 
-    public function getValue() : float
+    public function getValue(): float
     {
         return $this->value;
     }
 
-    public function getCurrency() : string
+    public function getCurrency(): string
     {
         return $this->currency;
     }

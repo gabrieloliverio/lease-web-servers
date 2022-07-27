@@ -9,7 +9,7 @@ class RamMemoryDescriptorParser
 {
     private const DESCRIPTOR_REGEX = '/(\d+)(\w{2})(\w+)/';
 
-    public function parseCapacity(string $memoryDescriptor) : int
+    public function parseCapacity(string $memoryDescriptor): int
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $memoryDescriptor, $matches);
@@ -21,13 +21,13 @@ class RamMemoryDescriptorParser
         return $matches[1];
     }
 
-    public function parseDataUnitEnum(string $memoryDescriptor) : DataUnitEnum
+    public function parseDataUnitEnum(string $memoryDescriptor): DataUnitEnum
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $memoryDescriptor, $matches);
 
         if (
-            empty($matches) || 
+            empty($matches) ||
             !isset($matches[2]) ||
             !DataUnitEnum::tryFrom($matches[2])
             ) {
@@ -39,15 +39,15 @@ class RamMemoryDescriptorParser
         return DataUnitEnum::from($unit);
     }
 
-    public function parseType(string $memoryDescriptor) : string
+    public function parseType(string $memoryDescriptor): string
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $memoryDescriptor, $matches);
         $validDiskTypes = ['DDR3', 'DDR4'];
 
         if (
-            empty($matches) || 
-            !isset($matches[3]) || 
+            empty($matches) ||
+            !isset($matches[3]) ||
             !in_array($matches[3], $validDiskTypes)
             ) {
             throw new InvalidArgumentException("Invalid descriptor format");

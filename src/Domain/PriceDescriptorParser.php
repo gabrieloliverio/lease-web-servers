@@ -8,7 +8,7 @@ class PriceDescriptorParser
 {
     private const DESCRIPTOR_REGEX = '/([^\d]+)(\d+\.\d+)/';
 
-    public function parseValue(string $priceDescriptor) : float
+    public function parseValue(string $priceDescriptor): float
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $priceDescriptor, $matches);
@@ -20,7 +20,7 @@ class PriceDescriptorParser
         return $matches[2];
     }
 
-    public function parseCurrency(string $priceDescriptor) : string
+    public function parseCurrency(string $priceDescriptor): string
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $priceDescriptor, $matches);

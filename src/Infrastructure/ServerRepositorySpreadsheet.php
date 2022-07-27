@@ -29,11 +29,10 @@ class ServerRepositorySpreadsheet implements ServerRepository
         RamMemoryDTO|array $ramMemoryList = null,
         ?HardDiskTypeEnum $hardDiskType = null,
         ?LocationDTO $location = null
-    ) : array
-    {
+    ): array {
         $result = [];
         $servers = $this->getAll();
-        
+
         if (
             !$storage &&
             !$ramMemoryList &&
@@ -51,7 +50,7 @@ class ServerRepositorySpreadsheet implements ServerRepository
             if ($ramMemoryList && ! $server->hasRamMemoryCapacity($ramMemoryList)) {
                 continue;
             }
-            
+
             if ($hardDiskType && ! $server->hasHardDiskType($hardDiskType)) {
                 continue;
             }
@@ -66,7 +65,7 @@ class ServerRepositorySpreadsheet implements ServerRepository
         return $result;
     }
 
-    public function getAll() : array
+    public function getAll(): array
     {
         $worksheet = $this->spreadsheet->getActiveSheet();
         $highestColumnIndex = 5;
@@ -78,7 +77,7 @@ class ServerRepositorySpreadsheet implements ServerRepository
             for ($col = 1; $col <= $highestColumnIndex; ++$col) {
                 $tempRow[$col] = $worksheet->getCellByColumnAndRow($col, $row)->getValue();
             }
-            
+
             $eachModel = $tempRow[1];
             $eachRam = RamMemory::makeFromDescriptor($tempRow[2]);
             $eachStorage = Storage::makeFromDescriptor($tempRow[3]);

@@ -16,43 +16,49 @@ class FilterRepositorySpreadsheet implements FilterRepository
         $this->spreadsheet = IOFactory::load($filePath);
     }
 
-    public function getStorage() : array
+    public function getStorage(): array
     {
         $cellValues = $this->spreadsheet
              ->getActiveSheet()
              ->getCell('I3')
              ->getValue();
-        
-        return array_map(fn($option) => 
-            trim($option), 
-            explode(",", $cellValues));
+
+        return array_map(
+            fn ($option) =>
+            trim($option),
+            explode(",", $cellValues)
+        );
     }
 
-    public function getRam() : array
+    public function getRam(): array
     {
         $cellValues = $this->spreadsheet
              ->getActiveSheet()
              ->getCell('I4')
              ->getValue();
-        
-        return array_map(fn($option) => 
-            trim($option), 
-            explode(",", $cellValues));
+
+        return array_map(
+            fn ($option) =>
+            trim($option),
+            explode(",", $cellValues)
+        );
     }
 
-    public function getHardDiskType() : array
+    public function getHardDiskType(): array
     {
         $cellValues = $this->spreadsheet
              ->getActiveSheet()
              ->getCell('I5')
              ->getValue();
-        
-        return array_map(fn($option) => 
-            trim($option), 
-            explode(",", $cellValues));
+
+        return array_map(
+            fn ($option) =>
+            trim($option),
+            explode(",", $cellValues)
+        );
     }
 
-    public function getLocation() : array
+    public function getLocation(): array
     {
         $worksheet = $this->spreadsheet->getActiveSheet();
         $highestRow = $worksheet->getHighestRow();
@@ -60,7 +66,7 @@ class FilterRepositorySpreadsheet implements FilterRepository
 
         for ($row = 2; $row <= $highestRow; ++$row) {
             $value = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
-            $locations[] = $value; 
+            $locations[] = $value;
         }
 
         return array_values(array_unique($locations));

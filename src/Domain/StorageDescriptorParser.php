@@ -10,7 +10,7 @@ class StorageDescriptorParser
 {
     private const DESCRIPTOR_REGEX = '/(\d+)+x(\d+)(\w{2})(\w+)/';
 
-    public function parseDisksCapacity(string $storageDescriptor) : int
+    public function parseDisksCapacity(string $storageDescriptor): int
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
@@ -22,7 +22,7 @@ class StorageDescriptorParser
         return $matches[2];
     }
 
-    public function parseDiskQuantity(string $storageDescriptor) : int
+    public function parseDiskQuantity(string $storageDescriptor): int
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
@@ -34,13 +34,13 @@ class StorageDescriptorParser
         return $matches[1];
     }
 
-    public function parseDataUnitEnum(string $storageDescriptor) : DataUnitEnum
+    public function parseDataUnitEnum(string $storageDescriptor): DataUnitEnum
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
 
         if (
-            empty($matches) || 
+            empty($matches) ||
             !isset($matches[3]) ||
             !DataUnitEnum::tryFrom($matches[3])
             ) {
@@ -52,14 +52,14 @@ class StorageDescriptorParser
         return DataUnitEnum::from($unit);
     }
 
-    public function parseDisksType(string $storageDescriptor) : HardDiskTypeEnum
+    public function parseDisksType(string $storageDescriptor): HardDiskTypeEnum
     {
         $matches = [];
         preg_match(self::DESCRIPTOR_REGEX, $storageDescriptor, $matches);
 
         if (
-            empty($matches) || 
-            !isset($matches[4]) || 
+            empty($matches) ||
+            !isset($matches[4]) ||
             !HardDiskTypeEnum::tryFrom($matches[4])
             ) {
             throw new InvalidArgumentException("Invalid descriptor format");

@@ -70,10 +70,10 @@ class ServerController extends AbstractController
         if ($hardDiskType) {
             $hardDiskTypeEnum = HardDiskTypeEnum::from($hardDiskType);
         }
-        
+
         $results = $this->service->search(
-            $storageDTO, 
-            $ramDTOList, 
+            $storageDTO,
+            $ramDTOList,
             $hardDiskTypeEnum,
             $locationDTO
         );

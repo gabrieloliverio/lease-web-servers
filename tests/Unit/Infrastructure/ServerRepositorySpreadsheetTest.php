@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -14,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 class ServerRepositorySpreadsheetTest extends TestCase
 {
     private static $repository;
-    
+
     public static function setUpBeforeClass(): void
     {
         self::$repository = new ServerRepositorySpreadsheet("assets/");
@@ -24,7 +25,7 @@ class ServerRepositorySpreadsheetTest extends TestCase
     {
         $this->assertCount(486, self::$repository->getAll());
     }
-    
+
     public function testSearchFoundSingleMemory()
     {
         $storage = new StorageDTO(24, DataUnitEnum::TB);

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -39,7 +40,7 @@ class StorageTest extends TestCase
         $storage01 = new Storage(HardDiskTypeEnum::SSD, 240, DataUnitEnum::GB);
         $storage02 = new Storage(HardDiskTypeEnum::SATA2, 1000, DataUnitEnum::GB);
         $storage03 = new Storage(HardDiskTypeEnum::SATA2, 2, DataUnitEnum::TB);
-        
+
         $this->assertEquals($storage01, Storage::makeFromDescriptor($descriptor01));
         $this->assertEquals($storage02, Storage::makeFromDescriptor($descriptor02));
         $this->assertEquals($storage03, Storage::makeFromDescriptor($descriptor03));
@@ -122,7 +123,7 @@ class StorageTest extends TestCase
         $this->assertFalse($server->hasRamMemoryCapacity($ramMemories02));
     }
 
-    public function invalidDescritorProvider() : array
+    public function invalidDescritorProvider(): array
     {
         return [
             [''],

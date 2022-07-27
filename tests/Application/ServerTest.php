@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -33,7 +34,7 @@ class ServerTest extends WebTestCase
             'hard_disk_type' => 'SATA',
         ]);
         $this->assertResponseIsSuccessful();
-        
+
         $results = json_decode($client->getResponse()->getContent())->results;
         $this->assertEmpty($results);
     }
@@ -43,7 +44,7 @@ class ServerTest extends WebTestCase
         $client = static::createClient();
         $client->xmlHttpRequest('GET', self::SEARCH_ENDPOINT);
         $this->assertResponseIsSuccessful();
-        
+
         $results = json_decode($client->getResponse()->getContent())->results;
         $this->assertCount(486, $results);
     }
@@ -58,7 +59,7 @@ class ServerTest extends WebTestCase
             'hard_disk_type' => 'SATA',
         ]);
         $this->assertResponseIsUnprocessable();
-        
+
         $error = json_decode($client->getResponse()->getContent())->error;
         $this->assertNotEmpty($error);
     }
@@ -73,7 +74,7 @@ class ServerTest extends WebTestCase
             'hard_disk_type' => 'SATA',
         ]);
         $this->assertResponseIsUnprocessable();
-        
+
         $error = json_decode($client->getResponse()->getContent())->error;
         $this->assertNotEmpty($error);
     }
@@ -88,7 +89,7 @@ class ServerTest extends WebTestCase
             'hard_disk_type' => 'FOO',
         ]);
         $this->assertResponseIsUnprocessable();
-        
+
         $error = json_decode($client->getResponse()->getContent())->error;
         $this->assertNotEmpty($error);
     }

@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 
 declare(strict_types=1);
 
@@ -16,7 +17,7 @@ class RamMemoryTest extends TestCase
         $memory01 = new RamMemory('DDR3', 32, DataUnitEnum::GB);
         $memory02 = new RamMemory('DDR3', 4, DataUnitEnum::TB);
         $memory03 = new RamMemory('DDR4', 128, DataUnitEnum::GB);
-        
+
         $this->assertEquals($memory01, RamMemory::makeFromDescriptor($descriptor01));
         $this->assertEquals($memory02, RamMemory::makeFromDescriptor($descriptor02));
         $this->assertEquals($memory03, RamMemory::makeFromDescriptor($descriptor03));
@@ -32,7 +33,7 @@ class RamMemoryTest extends TestCase
         RamMemory::makeFromDescriptor($descriptor);
     }
 
-    public function invalidDescritorProvider() : array
+    public function invalidDescritorProvider(): array
     {
         return [
             [''],

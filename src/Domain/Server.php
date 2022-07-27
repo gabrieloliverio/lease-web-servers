@@ -16,35 +16,35 @@ class Server implements JsonSerializable
         private Storage $storage,
         private string $location,
         private Price $price
-    )
-    { }
+    ) {
+    }
 
-    public function getModel() : string
+    public function getModel(): string
     {
         return $this->model;
     }
 
-    public function getRamMemory() : RamMemory
+    public function getRamMemory(): RamMemory
     {
         return $this->ramMemory;
     }
 
-    public function getStorage() : Storage
+    public function getStorage(): Storage
     {
         return $this->storage;
     }
 
-    public function getLocation() : string
+    public function getLocation(): string
     {
         return $this->location;
     }
 
-    public function getPrice() : Price
+    public function getPrice(): Price
     {
         return $this->price;
     }
 
-    public function hasStorageCapacity(StorageDTO $storageRequired) : bool
+    public function hasStorageCapacity(StorageDTO $storageRequired): bool
     {
         if ($storageRequired->dataUnit == DataUnitEnum::GB) {
             return $this->storage->getTotalCapacityInGB() == $storageRequired->capacity;
@@ -53,7 +53,7 @@ class Server implements JsonSerializable
         return $this->storage->getTotalCapacityInTB() == $storageRequired->capacity;
     }
 
-    public function hasRamMemoryCapacity(RamMemoryDTO|array $ramMemoryRequired) : bool
+    public function hasRamMemoryCapacity(RamMemoryDTO|array $ramMemoryRequired): bool
     {
         if (is_array($ramMemoryRequired)) {
             return $this->hasRamMemoryCapacityFromList($ramMemoryRequired);
@@ -87,10 +87,10 @@ class Server implements JsonSerializable
         return $hasCapacity;
     }
 
-    public function hasHardDiskType(HardDiskTypeEnum $hardDiskType) : bool
+    public function hasHardDiskType(HardDiskTypeEnum $hardDiskType): bool
     {
         if ($hardDiskType == HardDiskTypeEnum::SATA || $hardDiskType == HardDiskTypeEnum::SATA2) {
-            return $this->storage->getType() == HardDiskTypeEnum::SATA 
+            return $this->storage->getType() == HardDiskTypeEnum::SATA
                 || $this->storage->getType() == HardDiskTypeEnum::SATA2;
         }
 

@@ -4,30 +4,31 @@ namespace App\Service;
 
 use App\Domain\Filter\FilterRepository;
 
-class FilterTypeService {
+class FilterTypeService
+{
     private $repository;
 
     public function __construct(FilterRepository $filterRepository)
-    { 
+    {
         $this->repository = $filterRepository;
     }
 
-    public function getStorage() : array
+    public function getStorage(): array
     {
         return $this->repository->getStorage();
     }
 
-    public function getRam() : array
+    public function getRam(): array
     {
         return $this->repository->getRam();
     }
 
-    public function getHardDiskType() : array
+    public function getHardDiskType(): array
     {
         return $this->repository->getHardDiskType();
     }
 
-    public function getLocation() : array
+    public function getLocation(): array
     {
         return $this->repository->getLocation();
     }

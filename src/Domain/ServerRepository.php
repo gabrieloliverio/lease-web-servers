@@ -11,7 +11,7 @@ interface ServerRepository
 {
     /**
      * Searches for a server, based on filters
-     * 
+     *
      * @param StorageDTO $storage
      * @param RamMemoryDTO|array $ramMemory RamMemoryDTO or Array of RamMemoryDTO objects
      * @param HardDiskTypeEnum $hardDiskType
@@ -23,5 +23,5 @@ interface ServerRepository
         RamMemoryDTO|array $ramMemory = null,
         ?HardDiskTypeEnum $hardDiskType = null,
         ?LocationDTO $location = null
-    ) : array;
+    ): array;
 }
