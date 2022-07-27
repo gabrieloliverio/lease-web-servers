@@ -10,6 +10,7 @@
         "doctrine/annotations": "^1.13",
         "nelmio/api-doc-bundle": "^4.9",
         "phpoffice/phpspreadsheet": "^1.24",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "6.1.*",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.1.*",
