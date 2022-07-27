@@ -17,11 +17,14 @@ class ServerSearchType extends AbstractType
         $builder
             ->add('storage', TextType::class, [
                 'required' => false,
+                'constraints' => [
+                    new Regex("/^\d+(GB|TB)$/")
+                ],
             ])
             ->add('ram', TextType::class, [
                 'required' => false,
                 'constraints' => [
-                    new Regex("/^((\d+\w{2})(,\d+\w{2})*)?$/")
+                    new Regex("/^((\d+(GB|TB))(,\d+(GB|TB))*)?$/")
                 ],
             ])
             ->add('hard_disk_type', TextType::class, [

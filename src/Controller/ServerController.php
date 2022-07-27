@@ -44,7 +44,6 @@ class ServerController extends AbstractController
         $hardDiskType = $request->query->get('hard_disk_type', '');
         $location = $request->query->get('location', '');
 
-        $memoryDTO = null;
         $storageDTO = null;
         $locationDTO = null;
         $hardDiskTypeEnum = null;

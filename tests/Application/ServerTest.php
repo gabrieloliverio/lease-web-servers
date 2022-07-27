@@ -47,4 +47,49 @@ class ServerTest extends WebTestCase
         $results = json_decode($client->getResponse()->getContent())->results;
         $this->assertCount(486, $results);
     }
+
+    public function testSearchInvalidParameterRam()
+    {
+        $client = static::createClient();
+        $client->xmlHttpRequest('GET', self::SEARCH_ENDPOINT, [
+            'location' => 'FrankfurtFRA-10',
+            'ram' => '100GA',
+            'storage' => '72GB',
+            'hard_disk_type' => 'SATA',
+        ]);
+        $this->assertResponseIsUnprocessable();
+        
+        $error = json_decode($client->getResponse()->getContent())->error;
+        $this->assertNotEmpty($error);
+    }
+
+    public function testSearchInvalidParameterStorage()
+    {
+        $client = static::createClient();
+        $client->xmlHttpRequest('GET', self::SEARCH_ENDPOINT, [
+            'location' => 'FrankfurtFRA-10',
+            'ram' => '100GB',
+            'storage' => '72AB',
+            'hard_disk_type' => 'SATA',
+        ]);
+        $this->assertResponseIsUnprocessable();
+        
+        $error = json_decode($client->getResponse()->getContent())->error;
+        $this->assertNotEmpty($error);
+    }
+
+    public function testSearchInvalidParameterHardDiskType()
+    {
+        $client = static::createClient();
+        $client->xmlHttpRequest('GET', self::SEARCH_ENDPOINT, [
+            'location' => 'FrankfurtFRA-10',
+            'ram' => '100GB',
+            'storage' => '72GB',
+            'hard_disk_type' => 'FOO',
+        ]);
+        $this->assertResponseIsUnprocessable();
+        
+        $error = json_decode($client->getResponse()->getContent())->error;
+        $this->assertNotEmpty($error);
+    }
 }
