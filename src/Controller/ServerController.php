@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-#[Route('/api/servers/')]
+#[Route('/api/servers')]
 class ServerController extends AbstractController
 {
     private $service;
@@ -27,7 +27,7 @@ class ServerController extends AbstractController
         $this->validator = $validator;
     }
 
-    #[Route('')]
+    #[Route('/')]
     public function index(Request $request): Response
     {
         $form = $this->createForm(ServerSearchType::class);
