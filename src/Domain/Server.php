@@ -7,7 +7,6 @@ use App\Domain\Filter\StorageDTO;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
 use JsonSerializable;
-use Symfony\Component\VarDumper\Cloner\Data;
 
 class Server implements JsonSerializable
 {
@@ -16,7 +15,7 @@ class Server implements JsonSerializable
         private RamMemory $ramMemory,
         private Storage $storage,
         private string $location,
-        private float $price
+        private Price $price
     )
     { }
 
@@ -40,7 +39,7 @@ class Server implements JsonSerializable
         return $this->location;
     }
 
-    public function getPrice() : float
+    public function getPrice() : Price
     {
         return $this->price;
     }
@@ -106,7 +105,7 @@ class Server implements JsonSerializable
             'storage' => (string) $this->storage,
             'hard_disk_type' => $this->storage->getType(),
             'location' => $this->location,
-            'price' => $this->price,
+            'price' => (string) $this->price,
         ];
     }
 }

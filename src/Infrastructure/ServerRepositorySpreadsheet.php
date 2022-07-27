@@ -5,6 +5,7 @@ namespace App\Infrastructure;
 use App\Domain\Filter\LocationDTO;
 use App\Domain\Filter\RamMemoryDTO;
 use App\Domain\Filter\StorageDTO;
+use App\Domain\Price;
 use App\Domain\RamMemory;
 use App\Domain\Server;
 use App\Domain\ServerRepository;
@@ -81,10 +82,8 @@ class ServerRepositorySpreadsheet implements ServerRepository
             $eachModel = $tempRow[1];
             $eachRam = RamMemory::makeFromDescriptor($tempRow[2]);
             $eachStorage = Storage::makeFromDescriptor($tempRow[3]);
+            $eachPrice = Price::makeFromDescriptor($tempRow[5]);
             $eachLocation = $tempRow[4];
-            $matches = [];
-            preg_match('/\d+\.\d+/', $tempRow[5], $matches);
-            $eachPrice = (float) $matches[0];
 
             $servers[] = new Server($eachModel, $eachRam, $eachStorage, $eachLocation, $eachPrice);
         }
