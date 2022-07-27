@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-use App\Domain\Filter\HardDiskTypeDTO;
 use App\Domain\Filter\LocationDTO;
 use App\Domain\Filter\RamMemoryDTO;
 use App\Domain\Filter\StorageDTO;
 use App\Domain\Server;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
-use App\Infrastructure\FilterRepositorySpreadsheet;
 use App\Infrastructure\ServerRepositorySpreadsheet;
 use PHPUnit\Framework\TestCase;
 
@@ -19,7 +17,7 @@ class ServerRepositorySpreadsheetTest extends TestCase
     
     public static function setUpBeforeClass(): void
     {
-        self::$repository = new ServerRepositorySpreadsheet();
+        self::$repository = new ServerRepositorySpreadsheet("assets/");
     }
 
     public function testGetAll(): void

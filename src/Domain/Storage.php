@@ -15,12 +15,12 @@ class Storage
     { }
 
     /**
-     * Makes a Storage instance
+     * Makes a Storage instance from a descriptor
      * 
      * @param string $storageDescriptor Descriptor like  "8x2TBSATA2"
      * @return Storage
      */
-    public static function make(string $storageDescriptor) : Storage
+    public static function makeFromDescriptor(string $storageDescriptor) : Storage
     {
         $parser = new StorageDescriptorParser($storageDescriptor);
         $capacity = $parser->parseDisksCapacity($storageDescriptor);

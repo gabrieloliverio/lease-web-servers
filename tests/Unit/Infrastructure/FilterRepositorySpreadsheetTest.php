@@ -11,7 +11,7 @@ class FilterRepositorySpreadsheetTest extends TestCase
     
     public static function setUpBeforeClass(): void
     {
-        self::$repository = new FilterRepositorySpreadsheet();
+        self::$repository = new FilterRepositorySpreadsheet('assets/');
     }
 
     public function storageProvider() : array

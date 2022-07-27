@@ -15,7 +15,7 @@ class StorageTest extends TestCase
 {
     public function testGetters()
     {
-        $storage = Storage::make('2x4TBSSD');
+        $storage = Storage::makeFromDescriptor('2x4TBSSD');
         $ramMemory = RamMemory::make('4GBDDR3');
         $model = 'FOO';
         $location = 'BAR';
@@ -37,9 +37,9 @@ class StorageTest extends TestCase
         $storage02 = new Storage(HardDiskTypeEnum::SATA2, 1000, DataUnitEnum::GB);
         $storage03 = new Storage(HardDiskTypeEnum::SATA2, 2, DataUnitEnum::TB);
         
-        $this->assertEquals($storage01, Storage::make($descriptor01));
-        $this->assertEquals($storage02, Storage::make($descriptor02));
-        $this->assertEquals($storage03, Storage::make($descriptor03));
+        $this->assertEquals($storage01, Storage::makeFromDescriptor($descriptor01));
+        $this->assertEquals($storage02, Storage::makeFromDescriptor($descriptor02));
+        $this->assertEquals($storage03, Storage::makeFromDescriptor($descriptor03));
     }
 
     /**
@@ -49,29 +49,29 @@ class StorageTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
 
-        Storage::make($descriptor);
+        Storage::makeFromDescriptor($descriptor);
     }
 
     public function testGetTotalCapacityInGB(): void
     {
-        $storage01 = Storage::make('2x120GBSSD');
-        $storage02 = Storage::make('2x4TBSSD');
+        $storage01 = Storage::makeFromDescriptor('2x120GBSSD');
+        $storage02 = Storage::makeFromDescriptor('2x4TBSSD');
         $this->assertEquals(240, $storage01->getTotalCapacityInGB());
         $this->assertEquals(8000, $storage02->getTotalCapacityInGB());
     }
 
     public function testGetTotalCapacityInTB(): void
     {
-        $storage01 = Storage::make('2x120GBSSD');
-        $storage02 = Storage::make('2x4TBSSD');
+        $storage01 = Storage::makeFromDescriptor('2x120GBSSD');
+        $storage02 = Storage::makeFromDescriptor('2x4TBSSD');
         $this->assertEquals(8, $storage02->getTotalCapacityInTB());
         $this->assertEquals(0.24, $storage01->getTotalCapacityInTB());
     }
 
     public function testHasStorageCapacity(): void
     {
-        $storage01 = Storage::make('2x120GBSSD');
-        $storage02 = Storage::make('2x4TBSSD');
+        $storage01 = Storage::makeFromDescriptor('2x120GBSSD');
+        $storage02 = Storage::makeFromDescriptor('2x4TBSSD');
         $ramMemory = RamMemory::make('4GBDDR3');
         $server01 = new Server('FOO', $ramMemory, $storage01, 'BAR', 199.99);
         $server02 = new Server('BAZ', $ramMemory, $storage02, 'BUZ', 399.99);
@@ -87,7 +87,7 @@ class StorageTest extends TestCase
 
     public function testHasRamMemoryCapacitySingleItem(): void
     {
-        $storage = Storage::make('2x120GBSSD');
+        $storage = Storage::makeFromDescriptor('2x120GBSSD');
         $ramMemory01 = RamMemory::make('4GBDDR3');
         $ramMemory02 = RamMemory::make('128GBDDR3');
         $server01 = new Server('FOO', $ramMemory01, $storage, 'BAR', 199.99);
@@ -104,7 +104,7 @@ class StorageTest extends TestCase
 
     public function testHasRamMemoryCapacityMultipleItems(): void
     {
-        $storage = Storage::make('2x120GBSSD');
+        $storage = Storage::makeFromDescriptor('2x120GBSSD');
         $ramMemory01 = new RamMemoryDTO(4, DataUnitEnum::GB);
         $ramMemory02 = new RamMemoryDTO(8, DataUnitEnum::GB);
         $ramMemory03 = new RamMemoryDTO(16, DataUnitEnum::GB);

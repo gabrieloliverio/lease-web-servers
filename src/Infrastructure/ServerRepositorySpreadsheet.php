@@ -80,7 +80,7 @@ class ServerRepositorySpreadsheet implements ServerRepository
             
             $eachModel = $tempRow[1];
             $eachRam = RamMemory::make($tempRow[2]);
-            $eachStorage = Storage::make($tempRow[3]);
+            $eachStorage = Storage::makeFromDescriptor($tempRow[3]);
             $eachLocation = $tempRow[4];
             $matches = [];
             preg_match('/\d+\.\d+/', $tempRow[5], $matches);
