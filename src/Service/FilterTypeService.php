@@ -2,7 +2,7 @@
 
 namespace App\Service;
 
-use App\Domain\Filter\FilterRepository;
+use App\Domain\FilterRepository;
 
 class FilterTypeService
 {

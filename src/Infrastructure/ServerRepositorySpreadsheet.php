@@ -2,9 +2,9 @@
 
 namespace App\Infrastructure;
 
-use App\Domain\Filter\LocationDTO;
-use App\Domain\Filter\RamMemoryDTO;
-use App\Domain\Filter\StorageDTO;
+use App\DTO\LocationDTO;
+use App\DTO\RamMemoryCapacityDTO;
+use App\DTO\StorageCapacityDTO;
 use App\Domain\ServerRepository;
 use App\Enums\HardDiskTypeEnum;
 
@@ -20,8 +20,8 @@ class ServerRepositorySpreadsheet implements ServerRepository
     }
 
     public function search(
-        ?StorageDTO $storage = null,
-        RamMemoryDTO|array $ramMemoryList = null,
+        ?StorageCapacityDTO $storage = null,
+        RamMemoryCapacityDTO|array $ramMemoryList = null,
         ?HardDiskTypeEnum $hardDiskType = null,
         ?LocationDTO $location = null
     ): array {

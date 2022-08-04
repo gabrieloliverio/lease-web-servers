@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Filter;
+namespace App\Domain;
 
 interface FilterRepository
 {

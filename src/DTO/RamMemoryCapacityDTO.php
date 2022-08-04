@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Filter;
+namespace App\DTO;
 
 use App\Enums\DataUnitEnum;
 
-class StorageDTO
+class RamMemoryCapacityDTO
 {
     public function __construct(
         public int $capacity,

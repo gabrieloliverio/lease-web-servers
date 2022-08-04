@@ -3,9 +3,9 @@
 
 declare(strict_types=1);
 
-use App\Domain\Filter\LocationDTO;
-use App\Domain\Filter\RamMemoryDTO;
-use App\Domain\Filter\StorageDTO;
+use App\DTO\LocationDTO;
+use App\DTO\RamMemoryCapacityDTO;
+use App\DTO\StorageCapacityDTO;
 use App\Domain\Server;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
@@ -28,8 +28,8 @@ class ServerRepositorySpreadsheetTest extends TestCase
 
     public function testSearchFoundSingleMemory()
     {
-        $storage = new StorageDTO(24, DataUnitEnum::TB);
-        $ram = new RamMemoryDTO(32, DataUnitEnum::GB);
+        $storage = new StorageCapacityDTO(24, DataUnitEnum::TB);
+        $ram = new RamMemoryCapacityDTO(32, DataUnitEnum::GB);
         $hardDiskType = HardDiskTypeEnum::SATA;
         $location = new LocationDTO('FrankfurtFRA-10');
 
@@ -48,10 +48,10 @@ class ServerRepositorySpreadsheetTest extends TestCase
 
     public function testSearchFoundMultipleMemory()
     {
-        $storage = new StorageDTO(24, DataUnitEnum::TB);
+        $storage = new StorageCapacityDTO(24, DataUnitEnum::TB);
         $ram = [
-            new RamMemoryDTO(16, DataUnitEnum::GB),
-            new RamMemoryDTO(32, DataUnitEnum::GB),
+            new RamMemoryCapacityDTO(16, DataUnitEnum::GB),
+            new RamMemoryCapacityDTO(32, DataUnitEnum::GB),
         ];
         $hardDiskType = HardDiskTypeEnum::SATA;
         $location = new LocationDTO('FrankfurtFRA-10');
@@ -71,8 +71,8 @@ class ServerRepositorySpreadsheetTest extends TestCase
 
     public function testSearchNotFound()
     {
-        $storage = new StorageDTO(72, DataUnitEnum::TB);
-        $ram = [new RamMemoryDTO(100, DataUnitEnum::GB)];
+        $storage = new StorageCapacityDTO(72, DataUnitEnum::TB);
+        $ram = [new RamMemoryCapacityDTO(100, DataUnitEnum::GB)];
         $hardDiskType = HardDiskTypeEnum::SATA;
         $location = new LocationDTO('FrankfurtFRA-10');
 

@@ -2,9 +2,9 @@
 
 namespace App\Domain;
 
-use App\Domain\Filter\LocationDTO;
-use App\Domain\Filter\RamMemoryDTO;
-use App\Domain\Filter\StorageDTO;
+use App\DTO\LocationDTO;
+use App\DTO\RamMemoryCapacityDTO;
+use App\DTO\StorageCapacityDTO;
 use App\Enums\HardDiskTypeEnum;
 
 interface ServerRepository
@@ -12,15 +12,15 @@ interface ServerRepository
     /**
      * Searches for a server, based on filters
      *
-     * @param StorageDTO $storage
-     * @param RamMemoryDTO|array $ramMemory RamMemoryDTO or Array of RamMemoryDTO objects
+     * @param StorageCapacityDTO $storage
+     * @param RamMemoryCapacityDTO|array $ramMemory RamMemoryCapacityDTO or Array of RamMemoryCapacityDTO objects
      * @param HardDiskTypeEnum $hardDiskType
      * @param Location $location
      * @return array Array of Server objects
      */
     public function search(
-        ?StorageDTO $storage = null,
-        RamMemoryDTO|array $ramMemory = null,
+        ?StorageCapacityDTO $storage = null,
+        RamMemoryCapacityDTO|array $ramMemory = null,
         ?HardDiskTypeEnum $hardDiskType = null,
         ?LocationDTO $location = null
     ): array;

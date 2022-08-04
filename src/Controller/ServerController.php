@@ -2,14 +2,13 @@
 
 namespace App\Controller;
 
-use App\Domain\Filter\RamMemoryDTO;
-use App\Domain\Filter\StorageDTO;
-use App\Domain\Filter\LocationDTO;
+use App\DTO\StorageCapacityDTO;
+use App\DTO\LocationDTO;
+use App\DTO\RamMemoryCapacityDTO;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
 use App\Form\ServerSearchType;
 use App\Service\ServerService;
-use Nelmio\ApiDocBundle\Annotation\Model;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -91,13 +90,13 @@ class ServerController extends AbstractController
             foreach ($rams as $ram) {
                 $memoryMatches = [];
                 preg_match('/(\d+)(\w{2})/', $ram, $memoryMatches);
-                $ramDTOList[] = new RamMemoryDTO($memoryMatches[1], DataUnitEnum::from($memoryMatches[2]));
+                $ramDTOList[] = new RamMemoryCapacityDTO($memoryMatches[1], DataUnitEnum::from($memoryMatches[2]));
             }
         }
         if ($storage) {
             $storageMatches = [];
             preg_match('/(\d+)(\w{2})/', $storage, $storageMatches);
-            $storageDTO = new StorageDTO($storageMatches[1], DataUnitEnum::from($storageMatches[2]));
+            $storageDTO = new StorageCapacityDTO($storageMatches[1], DataUnitEnum::from($storageMatches[2]));
         }
 
         if ($location) {

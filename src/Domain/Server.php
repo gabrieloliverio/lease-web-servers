@@ -2,8 +2,8 @@
 
 namespace App\Domain;
 
-use App\Domain\Filter\RamMemoryDTO;
-use App\Domain\Filter\StorageDTO;
+use App\DTO\RamMemoryCapacityDTO;
+use App\DTO\StorageCapacityDTO;
 use App\Enums\DataUnitEnum;
 use App\Enums\HardDiskTypeEnum;
 use JsonSerializable;
@@ -44,7 +44,7 @@ class Server implements JsonSerializable
         return $this->price;
     }
 
-    public function hasStorageCapacity(StorageDTO $storageRequired): bool
+    public function hasStorageCapacity(StorageCapacityDTO $storageRequired): bool
     {
         if ($storageRequired->dataUnit == DataUnitEnum::GB) {
             return $this->storage->getTotalCapacityInGB() == $storageRequired->capacity;
@@ -53,7 +53,7 @@ class Server implements JsonSerializable
         return $this->storage->getTotalCapacityInTB() == $storageRequired->capacity;
     }
 
-    public function hasRamMemoryCapacity(RamMemoryDTO|array $ramMemoryRequired): bool
+    public function hasRamMemoryCapacity(RamMemoryCapacityDTO|array $ramMemoryRequired): bool
     {
         if (is_array($ramMemoryRequired)) {
             return $this->hasRamMemoryCapacityFromList($ramMemoryRequired);
